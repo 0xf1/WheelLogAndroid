@@ -68,11 +68,16 @@ import permissions.dispatcher.OnPermissionDenied;
 import permissions.dispatcher.RuntimePermissions;
 import timber.log.Timber;
 
+
+
 import static com.cooper.wheellog.utils.MathsUtil.kmToMiles;
+
 
 
 @RuntimePermissions
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+
+    private Beeper beeper;
 
     Menu mMenu;
     MenuItem miSearch;
@@ -108,7 +113,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     LineChart chart1;
 
     WheelView wheelView;
-    
+
+
+
     private BluetoothLeService mBluetoothLeService;
     private BluetoothAdapter mBluetoothAdapter;
     private String mDeviceAddress;
@@ -736,6 +743,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 		tvRidingTime = (TextView) findViewById(R.id.tvRidingTime);
         tvMode = (TextView) findViewById(R.id.tvMode);
         wheelView = (WheelView) findViewById(R.id.wheelView);
+        wheelView.setBeeper(new Beeper() {
+            @Override
+            public void onBeep() {
+                beep();
+            }
+        });
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         mDrawer.addDrawerListener(new DrawerLayout.DrawerListener() {
@@ -912,6 +925,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void beep() {
+        sendBroadcast(new Intent(Constants.ACTION_REQUEST_KINGSONG_NAME_DATA));
     }
 
     public boolean onKeyUp(int keyCode, KeyEvent event) {

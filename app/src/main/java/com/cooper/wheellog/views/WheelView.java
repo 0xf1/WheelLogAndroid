@@ -15,7 +15,9 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import com.cooper.wheellog.Beeper;
 import com.cooper.wheellog.R;
 import com.cooper.wheellog.utils.Typefaces;
 
@@ -25,6 +27,8 @@ import static com.cooper.wheellog.utils.MathsUtil.dpToPx;
 import static com.cooper.wheellog.utils.MathsUtil.kmToMiles;
 
 public class WheelView extends View {
+
+    private Beeper beeper;
 
     private Paint outerArcPaint;
     Paint innerArcPaint;
@@ -151,6 +155,22 @@ public class WheelView extends View {
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setTypeface(tfTest);
+
+        this.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                beep();
+            }
+        });
+
+    }
+    public void setBeeper(Beeper beeper){
+        this.beeper = beeper;
+    }
+
+    private void beep() {
+        if (beeper!=null)
+            beeper.onBeep();
     }
 
     public void setMaxSpeed(int maxSpeed) {

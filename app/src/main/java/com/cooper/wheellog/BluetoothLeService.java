@@ -465,7 +465,8 @@ public class BluetoothLeService extends Service {
                 ks_characteristic.setValue(cmd);
                 Timber.i("writeBluetoothGattCharacteristic writeType = %d", ks_characteristic.getWriteType());
                 ks_characteristic.setWriteType(1);
-                return this.mBluetoothGatt.writeCharacteristic(ks_characteristic);
+                boolean ttt = this.mBluetoothGatt.writeCharacteristic(ks_characteristic);
+                return ttt;
             case GOTWAY:
                 BluetoothGattService gw_service = this.mBluetoothGatt.getService(UUID.fromString(Constants.GOTWAY_SERVICE_UUID));
                 if (gw_service == null) {
