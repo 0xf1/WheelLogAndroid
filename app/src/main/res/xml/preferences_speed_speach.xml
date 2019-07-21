@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sample="http://schemas.android.com/apk/res-auto">
+
+    <CheckBoxPreference
+        android:key="@string/use_speed_speech"
+        android:summary=""
+        android:title="Speed speech enabled" />
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
+        android:key="@string/speech_start_from_speed"
+        android:title="Start speesh from speed"
+        android:summary=""
+        android:enabled="true"
+        android:defaultValue="5"
+        sample:msbp_minValue="1"
+        sample:msbp_maxValue="80"
+        sample:msbp_interval="1"
+        sample:msbp_measurementUnit="km/h"
+        sample:msbp_dialogEnabled="true"/>
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
+        android:key="@string/same_speed_repeat_seconds"
+        android:title="Same speed repeat after seconds"
+        android:summary=""
+        android:enabled="true"
+        android:defaultValue="5"
+        sample:msbp_minValue="0"
+        sample:msbp_maxValue="50"
+        sample:msbp_interval="1"
+        sample:msbp_measurementUnit="sec"
+        sample:msbp_dialogEnabled="true"/>
+
+</PreferenceScreen>
